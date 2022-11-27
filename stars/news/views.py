@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import News, Pictures
+from .forms import NewsForm
 
 
 def index(request):
@@ -16,4 +17,8 @@ def article(request, news_id):
 
 
 def add_news(request):
-    return render(request, 'news/create.html')
+    if request.method == 'POST':
+        pass
+    else:
+        form = NewsForm()
+    return render(request, 'news/create.html', {'form': form})
