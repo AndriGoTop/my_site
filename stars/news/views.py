@@ -13,3 +13,7 @@ def article(request, news_id):
     pictures = news.pictures.all()
     context = {'news': news, 'pictures': pictures, }
     return render(request, 'news/article.html', context=context)
+
+
+def add_news(request):
+    return render(request, 'news/create.html')
