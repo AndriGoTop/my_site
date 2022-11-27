@@ -1,0 +1,3 @@
+$(function(){
+    $('#slick-photos').slick();
+})
