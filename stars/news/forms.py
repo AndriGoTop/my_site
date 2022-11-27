@@ -1,7 +1,14 @@
 from django import forms
+from .models import News, Pictures
 
 
-class NewsForm(forms.Form):
-    title = forms.CharField(max_length=250)
-    content = forms.CharField()
-    is_published = forms.BooleanField()
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['title', 'intro_text', 'content', 'intro_picture']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'intro_text': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'content': forms.Textarea(attrs={'class': 'form-control mb-3'}),
+            'intro_pictures': forms.ImageField(),
+        }

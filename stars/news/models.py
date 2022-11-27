@@ -3,7 +3,7 @@ from django.db import models
 
 class News(models.Model):
     title = models.CharField(max_length=250, verbose_name='Название новости')
-    intro_text = models.CharField(max_length=200, blank=True)
+    intro_text = models.CharField(max_length=200, blank=True, verbose_name='Предисловие')
     content = models.TextField(verbose_name='Контент')
     intro_picture = models.ImageField(upload_to='intro_pictures/%Y/%m/%d', verbose_name='Обложка')
     pictures = models.ManyToManyField('Pictures', blank=True, verbose_name='Изображенния')
