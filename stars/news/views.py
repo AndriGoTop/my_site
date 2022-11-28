@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import News, Pictures
 from .forms import NewsForm
+from django.core.paginator import Paginator
 
 
 def index(request):
     news = News.objects.filter(is_published=True)
-    context = {'news': news, }
+    paginator = Paginator(news, 5)
+    page_num = request.GET.get('page', 1)
+    page_objects = paginator.get_page(page_num)
+    context = {'news': news,
+               'page_obj': page_objects,
+               }
     return render(request, 'news/index.html', context=context)
 
 

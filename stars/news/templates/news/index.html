@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ближе к звездам</title>
     <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'news/img/3700_5_07.jpg' %}" type="image/x-icon">
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,8 +63,7 @@
 <section id="all-news">
     <div class="container">
         <div id="name-all-news">Все новости:</div>
-        {% for item in news %}
-        {% if item.is_published %}
+        {% for item in page_obj.object_list %}
         <a href="{% url 'article' item.pk %}" class="news-in-all-news">
             <div class="img-all-news"
                  style="background: url({{ item.intro_picture.url }}); background-repeat: no-repeat; background-position: center; background-size: cover;">
@@ -71,12 +71,12 @@
             <div class="about-all-news">
                 <div class="name-all-news">{{ item.title }}</div>
                 <div class="content-all-news">
-                    {{ item.content|truncatewords:45 }}
+                    {{ item.content|truncatewords:30 }}
                 </div>
                 <div class="info-all-news">{{ item.created_at|date:'d.m.Y H:i' }}</div>
             </div>
         </a>
-        {% endif %}
+
         {% empty %}
         <div style="display: flex; align-items: center;">
             <img src="https://cdni.iconscout.com/illustration/premium/thumb/astronaut-with-moon-rover-4239878-3527325.png"
@@ -85,6 +85,13 @@
         </div>
 
         {% endfor %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% for p in page_obj.paginator.page_range %}
+                <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
     </div>
 </section>
 <footer>

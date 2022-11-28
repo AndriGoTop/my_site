@@ -407,3 +407,21 @@ footer div .logo{
         flex-direction: column;
     }
 }
+
+
+/* pagination */
+
+.pagination{
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+}
+
+.page-item{
+    margin: 0 10px;
+}
+
+.page-link{
+    color: #000;
+    text-decoration: none;
+}
