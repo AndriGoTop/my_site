@@ -4,7 +4,7 @@ from .forms import NewsForm
 
 
 def index(request):
-    news = News.objects.all()
+    news = News.objects.filter(is_published=True)
     context = {'news': news, }
     return render(request, 'news/index.html', context=context)
 
@@ -20,10 +20,8 @@ def add_news(request):
     if request.method == 'POST':
         form = NewsForm(request.POST)
         if form.is_valid():
-            print(form)
-
             news = form.save()
-            return redirect(news)
+            return redirect('home')
     else:
         form = NewsForm()
     return render(request, 'news/create.html', {'form': form})
