@@ -25,7 +25,7 @@
             </div>
             <div class="right-header">
                 <a href="{% url 'add_news' %}" class="offer_news">Предложить новость</a>
-                <a href="{% url 'home' %}" class="all_news">Выбор редакции</a>
+                <a href="{% url 'favorite' %}" class="all_news">Выбор редакции</a>
             </div>
         </div>
     </div>
@@ -50,8 +50,8 @@
 <footer>
     <div class="container">
         <div id="in-footer">
-            <a href="#" class="logo">Ближе к <span class="red_logo">ЗВЕЗДАМ</span></a>
-            <a href="#">Предложить новость</a>
+            <a href="{% url 'home' %}" class="logo">Ближе к <span class="red_logo">ЗВЕЗДАМ</span></a>
+            <a href="{% url 'add_news' %}">Предложить новость</a>
             <a href="mailto:adndigolubenko@yandex.ru">adndigolubenko@yandex.ru</a>
         </div>
     </div>

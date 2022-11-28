@@ -34,6 +34,11 @@ def add_news(request):
 
 
 def favorite(request):
-    news = News.objects.get(is_favorite=True)
-    context = {'news': news, }
-    return render(request, 'news/article.html', context=context)
+    news = News.objects.filter(is_favorite=True)
+    paginator = Paginator(news, 20)
+    page_num = request.GET.get('page', 1)
+    page_objects = paginator.get_page(page_num)
+    context = {'news': news,
+               'page_obj': page_objects,
+               }
+    return render(request, 'news/favorite.html', context=context)

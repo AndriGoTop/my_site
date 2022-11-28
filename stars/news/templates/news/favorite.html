@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ближе к звездам</title>
+    <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'news/img/3700_5_07.jpg' %}" type="image/x-icon">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<section id="intro" style="background: #000305; padding: 20px 0">
+    <div class="container con-intro">
+        <header style="border: none;">
+            <div id="in_header">
+                <div class="left-header">
+                    <a href="{% url 'home' %}" class="logo">Ближе к <span class="red_logo">ЗВЕЗДАМ</span></a>
+                </div>
+                <div class="right-header">
+                    <a href="{% url 'add_news' %}" class="offer_news">Предложить новость</a>
+                    <a href="{% url 'favorite' %}" class="all_news">Выбор редакции</a>
+                </div>
+            </div>
+        </header>
+    </div>
+</section>
+<section id="all-news">
+    <div class="container">
+        <div id="name-all-news">Выбрано редакцией:</div>
+        {% for item in page_obj.object_list %}
+        <a href="{% url 'article' item.pk %}" class="news-in-all-news">
+            <div class="img-all-news"
+                 style="background: url({% if item.intro_picture %}{{ item.intro_picture.url }}{% else %}https://www.acetec.se/image/1043/12293d01d188062eb1fc7a88c46ee268.jpg{% endif %}); background-repeat: no-repeat; background-position: center; background-size: cover;">
+            </div>
+            <div class="about-all-news">
+                <div class="name-all-news">{{ item.title }}</div>
+                <div class="content-all-news">
+                    {{ item.content|truncatewords:30 }}
+                </div>
+                <div class="info-all-news">{{ item.created_at|date:'d.m.Y H:i' }}</div>
+            </div>
+        </a>
 
+        {% empty %}
+        <div style="display: flex; align-items: center;">
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/astronaut-with-moon-rover-4239878-3527325.png"
+                 alt="" srcset="" width="250px">
+            <span style="font-size: 24px; font-weight: 500;">Сейчас починим и полетим</span>
+        </div>
+
+        {% endfor %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% for p in page_obj.paginator.page_range %}
+                <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <div id="in-footer">
+            <a href="{% url 'home' %}" class="logo">Ближе к <span class="red_logo">ЗВЕЗДАМ</span></a>
+            <a href="{% url 'add_news' %}">Предложить новость</a>
+            <a href="mailto:adndigolubenko@yandex.ru">adndigolubenko@yandex.ru</a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
