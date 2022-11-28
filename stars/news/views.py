@@ -31,3 +31,9 @@ def add_news(request):
     else:
         form = NewsForm()
     return render(request, 'news/create.html', {'form': form})
+
+
+def favorite(request):
+    news = News.objects.get(is_favorite=True)
+    context = {'news': news, }
+    return render(request, 'news/article.html', context=context)

@@ -10,6 +10,7 @@ class News(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     is_published = models.BooleanField(verbose_name='Опубликовано', default=False)
+    is_favorite = models.BooleanField(verbose_name='Избранное', default=False)
 
     def __str__(self):
         return self.title
