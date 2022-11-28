@@ -31,7 +31,7 @@
             {% for item in news %}
             {% if forloop.counter == 1 and item.is_published == True %}
             <a id="left-intro-news" href="{% url 'article' item.pk %}"
-               style="background: url({{ item.intro_picture.url }});background-repeat: no-repeat;background-position: center;background-size: cover;">
+               style="background: url({% if item.intro_picture %}{{ item.intro_picture.url }}{% else %}https://www.acetec.se/image/1043/12293d01d188062eb1fc7a88c46ee268.jpg{% endif %});background-repeat: no-repeat;background-position: center;background-size: cover;">
                 <div id="about-left-news" style="width: 100%">
                     <div id="name-left-news">{{ item.title }}</div>
                     <div id="content-left-news">{{ item.content|truncatewords:40 }}
@@ -66,7 +66,7 @@
         {% for item in page_obj.object_list %}
         <a href="{% url 'article' item.pk %}" class="news-in-all-news">
             <div class="img-all-news"
-                 style="background: url({{ item.intro_picture.url }}); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                 style="background: url({% if item.intro_picture %}{{ item.intro_picture.url }}{% else %}https://www.acetec.se/image/1043/12293d01d188062eb1fc7a88c46ee268.jpg{% endif %}); background-repeat: no-repeat; background-position: center; background-size: cover;">
             </div>
             <div class="about-all-news">
                 <div class="name-all-news">{{ item.title }}</div>
