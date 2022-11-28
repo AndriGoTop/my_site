@@ -9,7 +9,7 @@ class News(models.Model):
     pictures = models.ManyToManyField('Pictures', blank=True, verbose_name='Изображенния')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
-    is_published = models.BooleanField(verbose_name='Опубликовано')
+    is_published = models.BooleanField(verbose_name='Опубликовано', default=False)
 
     def __str__(self):
         return self.title
